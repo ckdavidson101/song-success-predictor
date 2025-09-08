@@ -1,0 +1,25 @@
+# OS / editor
+.DS_Store
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+.env.*
+
+# Node
+node_modules/
+.next/
+dist/
+
+# Data / models
+data/
+!data/.gitkeep
+ml/artifacts/
+ml/runs/
+
+# DVC (add later)
+.dvc/
+.dvcignore
