@@ -4,6 +4,7 @@ pydantic==2.8.2
 python-dotenv==1.0.1
 python-multipart==0.0.9
 requests==2.32.3
+types-requests==2.32.4.20250809
 spotipy==2.24.0        # Spotify client (or roll your own)
 pandas==2.2.2
 numpy==2.0.1
@@ -12,4 +13,4 @@ lightgbm==4.5.0
 joblib==1.4.2
 shap==0.45.1
 
-# Add essentia/librosa (audio analysis) later 
+# Add essentia/librosa (audio analysis) later
