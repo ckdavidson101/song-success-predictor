@@ -21,5 +21,4 @@ ml/artifacts/
 ml/runs/
 
 # DVC (add later)
-.dvc/
-.dvcignore
+/.dvc/cache
