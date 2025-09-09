@@ -32,19 +32,18 @@ def search(q: str):
 def predict_spotify_track(uri: str = Query(..., description="Spotify track URL/URI/ID")):
     try:
         t = _sp.get_track(uri)
-        af = _sp.get_audio_features(uri)
         a = _sp.get_artist(t["artists"][0]["id"])
-        feats = build_features(t, af, a)
+        feats = build_features(t, a)
     except Exception as e:
         raise HTTPException(
             status_code=400, detail=f"Failed to fetch/assemble features: {e}"
         ) from e
-    # MODEL PLACEHOLDER: return features preview + stubbed score
+    # MODEL PLACEHOLDER: return context features + stubbed score
     return {
         "track_uri": uri,
         "track_name": t.get("name"),
         "artist_name": t["artists"][0]["name"],
-        "features_preview": {k: feats[k] for k in list(feats)[:8]},
+        "context_features": feats,
         "predicted_popularity": 63.2,
     }
 

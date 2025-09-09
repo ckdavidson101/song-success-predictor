@@ -4,29 +4,18 @@ from datetime import date
 from typing import Any, Dict
 
 
-def build_features(
-    track: Dict[str, Any], af: Dict[str, Any], artist: Dict[str, Any]
-) -> Dict[str, Any]:
+def build_features(track: Dict[str, Any], artist: Dict[str, Any]) -> Dict[str, Any]:
     feats = {
-        "danceability": af.get("danceability"),
-        "energy": af.get("energy"),
-        "valence": af.get("valence"),
-        "tempo": af.get("tempo"),
-        "key": af.get("key"),
-        "mode": af.get("mode"),
-        "loudness": af.get("loudness"),
-        "acousticness": af.get("acousticness"),
-        "instrumentalness": af.get("instrumentalness"),
-        "speechiness": af.get("speechiness"),
-        "liveness": af.get("liveness"),
-        "time_signature": af.get("time_signature"),
+        "track_popularity": track.get("popularity"),
         "duration_ms": track.get("duration_ms"),
         "explicit": int(bool(track.get("explicit"))),
+        "release_date": track.get("album", {}).get("release_date"),
         "days_since_release": _days_since(track.get("album", {}).get("release_date")),
         "release_type_single": int(track.get("album", {}).get("album_type") == "single"),
         "artist_popularity": artist.get("popularity"),
+        "artist_followers": artist.get("followers", {}).get("total"),
         "artist_followers_log": _log1p(artist.get("followers", {}).get("total")),
-        "label_popularity": track.get("popularity"),
+        "artist_genres": artist.get("genres", []),
     }
     return feats
 

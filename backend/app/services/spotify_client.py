@@ -72,10 +72,6 @@ class SpotifyClient:
         tid = self.parse_track_id(track_id_or_url)
         return self._get(f"/tracks/{tid}")
 
-    def get_audio_features(self, track_id_or_url: str) -> dict[str, Any]:
-        tid = self.parse_track_id(track_id_or_url)
-        return self._get(f"/audio-features/{tid}")
-
     def get_artist(self, artist_id_or_url: str) -> dict[str, Any]:
         aid = artist_id_or_url.split(":")[-1].split("/")[-1]
         return self._get(f"/artists/{aid}")
