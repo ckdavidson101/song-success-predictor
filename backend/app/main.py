@@ -43,6 +43,7 @@ def predict_spotify_track(uri: str = Query(..., description="Spotify track URL/U
         "track_uri": uri,
         "track_name": t.get("name"),
         "artist_name": t["artists"][0]["name"],
+        "preview_url": t.get("preview_url"),
         "context_features": feats,
         "predicted_popularity": 63.2,
     }
