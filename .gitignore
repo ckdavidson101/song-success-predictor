@@ -14,9 +14,19 @@ node_modules/
 .next/
 dist/
 
-# Data / models
-data/
+# Data / models (managed by DVC)
+# Allow DVC files (.dvc) but ignore actual data
+data/*.csv
+data/*.json
+data/*.parquet
+data/**/*.csv
+data/**/*.json
+data/**/*.parquet
+data/**/*.mp3
+data/**/*.wav
+data/**/*.m4a
 !data/.gitkeep
+!data/**/.gitkeep
 ml/artifacts/
 ml/runs/
 
