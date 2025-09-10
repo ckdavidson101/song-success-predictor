@@ -74,8 +74,16 @@ def extract_features(audio_path: str | Path) -> dict[str, Any]:
         features = {"duration_sec": duration_sec, "sr": sr}
 
         # Tempo estimation
-        tempo, _ = librosa.beat.tempo(y=y, sr=sr)
-        features["tempo_librosa"] = float(tempo[0]) if len(tempo) > 0 else 0.0
+        tempo_result = librosa.beat.tempo(y=y, sr=sr)
+        if isinstance(tempo_result, tuple):
+            tempo = tempo_result[0]
+        else:
+            tempo = tempo_result
+        features["tempo_librosa"] = (
+            float(tempo[0])
+            if hasattr(tempo, "__len__") and len(tempo) > 0
+            else float(tempo)
+        )
 
         # Onset detection for onset rate
         onset_frames = librosa.onset.onset_detect(y=y, sr=sr)
