@@ -1,6 +1,6 @@
 PY=python3
 
-.PHONY: setup dev backend frontend test lint fmt
+.PHONY: setup dev backend frontend test lint fmt data-kaggle
 
 setup:
 	$(PY) -m venv backend/.venv
@@ -27,3 +27,6 @@ lint:
 
 fmt:
 	cd backend && . .venv/bin/activate && black .
+
+data-kaggle:
+	cd backend && . .venv/bin/activate && $(PY) ../ml/utils/kaggle_ingest.py --raw-dir ../data/raw/kaggle/spotify_1m --out ../data/interim/spotify_features.parquet
