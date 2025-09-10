@@ -1,6 +1,6 @@
 PY=python3
 
-.PHONY: setup dev backend frontend test lint fmt data-kaggle data-manifest fetch-previews
+.PHONY: setup dev backend frontend test lint fmt data-kaggle data-manifest fetch-previews mlflow-ui
 
 setup:
 	$(PY) -m venv backend/.venv
@@ -36,3 +36,6 @@ data-manifest:
 
 fetch-previews:
 	. backend/.venv/bin/activate && $(PY) -m ml.utils.fetch_previews --manifest data/interim/manifest_v1.parquet --previews-dir data/previews --output data/interim/previews_manifest.parquet --max-workers 10
+
+mlflow-ui:
+	mlflow ui --backend-store-uri ./mlruns --port 5000

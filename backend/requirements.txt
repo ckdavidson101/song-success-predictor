@@ -12,5 +12,6 @@ scikit-learn==1.5.1
 lightgbm==4.5.0
 joblib==1.4.2
 shap==0.45.1
+mlflow==2.19.0
 
 # Add essentia/librosa (audio analysis) later
