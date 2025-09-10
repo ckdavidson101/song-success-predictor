@@ -4,6 +4,7 @@ from fastapi import FastAPI, File, HTTPException, Query, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.services.feature_builder import build_features
+from app.services.preview_resolver import PreviewResolver
 from app.services.spotify_client import SpotifyClient
 
 app = FastAPI(title="Song Success API", version="0.1.0")
@@ -39,13 +40,20 @@ def predict_spotify_track(uri: str = Query(..., description="Spotify track URL/U
             status_code=400, detail=f"Failed to fetch/assemble features: {e}"
         ) from e
     # MODEL PLACEHOLDER: return context features + stubbed score
+    preview = PreviewResolver.resolve(t, a)
+
     return {
-        "track_uri": uri,
         "track_name": t.get("name"),
-        "artist_name": t["artists"][0]["name"],
-        "preview_url": t.get("preview_url"),
+        "artist_name": a.get("name"),
+        "track_popularity": t.get("popularity"),
+        "artist_popularity": a.get("popularity"),
+        "artist_followers": a["followers"]["total"],
+        "genres": a.get("genres"),
+        "duration_ms": t.get("duration_ms"),
+        "release_date": t.get("album", {}).get("release_date"),
+        "explicit": t.get("explicit"),
         "context_features": feats,
-        "predicted_popularity": 63.2,
+        **preview,
     }
 
 
