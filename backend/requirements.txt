@@ -13,5 +13,7 @@ lightgbm==4.5.0
 joblib==1.4.2
 shap==0.45.1
 mlflow==2.19.0
-
-# Add essentia/librosa (audio analysis) later
+librosa==0.10.2
+soundfile==0.12.1
+audioread==3.0.1
+scipy==1.13.1
