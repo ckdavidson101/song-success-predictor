@@ -1,6 +1,6 @@
 PY=python3
 
-.PHONY: setup dev backend frontend test lint fmt data-kaggle data-manifest
+.PHONY: setup dev backend frontend test lint fmt data-kaggle data-manifest fetch-previews
 
 setup:
 	$(PY) -m venv backend/.venv
@@ -33,3 +33,6 @@ data-kaggle:
 
 data-manifest:
 	. backend/.venv/bin/activate && $(PY) -m ml.utils.sampling --in data/interim/spotify_features.parquet --out data/interim/manifest_v1.parquet --counts data/interim/manifest_v1_counts.csv --n 50000 --seed 42
+
+fetch-previews:
+	. backend/.venv/bin/activate && $(PY) -m ml.utils.fetch_previews --manifest data/interim/manifest_v1.parquet --previews-dir data/previews --output data/interim/previews_manifest.parquet --max-workers 10
