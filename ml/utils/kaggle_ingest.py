@@ -27,6 +27,7 @@ META_COLS = [
     "artist_name",
     "album_release_date",
     "duration_ms",
+    "genre",
 ]
 
 
